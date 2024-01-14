@@ -10,7 +10,8 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php if(akina_option('patternimg') || !get_post_thumbnail_id(get_the_ID())) { ?>
+	<?php 
+	if(should_show_title()) { ?>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
@@ -18,10 +19,9 @@
     <?php get_template_part('layouts/sidebox'); ?>
 	<div class="entry-content">
 		<?php
-			the_content();
-
+			the_content( '', true );
 			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'sakura' ),
+				'before' => '<div class="page-links">' . __( 'Pages:', 'sakurairo' ),
 				'after'  => '</div>',
 			) );
 		?>
@@ -32,7 +32,7 @@
 			edit_post_link(
 				sprintf(
 					/* translators: %s: Name of current post */
-					__( 'Edit %s', 'sakura' ),
+					__( 'Edit %s', 'sakurairo' ),
 					the_title( '<span class="screen-reader-text">"', '"</span>', false )
 				),
 				'<span class="edit-link">',
